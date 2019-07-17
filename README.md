@@ -1,4 +1,4 @@
-##Ammu-Nation resource by B1G
+#Ammu-Nation resource by B1G
 
 Developed for Los Pepinos RP
 
@@ -8,7 +8,7 @@ You need to farm weapon pieces, then you can buy weapons in the armory.
 
 This scripts has been made based in esx_Policejob.
 
-##INSTALLATION
+#INSTALLATION
 
 start LP_AmmuJob
 
