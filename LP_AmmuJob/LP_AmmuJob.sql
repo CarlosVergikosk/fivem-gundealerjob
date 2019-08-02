@@ -14,6 +14,10 @@ INSERT INTO `addon_inventory` (name, label, shared) VALUES
 INSERT INTO `jobs` (`name`, `label`, `whitelisted`) VALUES
 ('ammu', 'Ammu', 1);
 
+INSERT INTO `items` (`name`, `label`, `limit`, `rare`, `can_remove`) VALUES
+('weapon_piece', 'Weapon Piece', 25, 0, 1);
+
+
 INSERT INTO `job_grades` (`job_name`, `grade`, `name`, `label`, `salary`, `skin_male`, `skin_female`) VALUES
 ('ammu', 0, 'recruit', 'Recruta', 1000, '{}', '{}'),
 ('ammu', 1, 'officer', 'Empregado', 1200, '{}', '{}'),
