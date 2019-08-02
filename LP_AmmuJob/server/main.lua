@@ -11,16 +11,16 @@ TriggerEvent('esx_phone:registerNumber', 'ammu', _U('alert_ammu'), true, true)
 TriggerEvent('esx_society:registerSociety', 'ammu', 'ammu', 'society_ammu', 'society_ammu', 'society_ammu', {type = 'public'})
 
 local function Harvest(source)
-	SetTimeout(4000, function()
+	SetTimeout(30000, function()
 
 		if PlayersHarvesting[source] == true then
 			local xPlayer = ESX.GetPlayerFromId(source)
 			local weapon_piece_quantity = xPlayer.getInventoryItem('weapon_piece').count
 
-			if weapon_piece_quantity >= 50 then
+			if weapon_piece_quantity >= 25 then
 				TriggerClientEvent('esx:showNotification', source, _U('you_do_not_room'))
 			else
-				xPlayer.addInventoryItem('weapon_piece', 1)
+				xPlayer.addInventoryItem('weapon_piece', 2)
 				Harvest(source)
 			end
 		end

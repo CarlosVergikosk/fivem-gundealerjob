@@ -34,22 +34,23 @@ Config.PoliceStations = {
 
 		-- https://wiki.rage.mp/index.php?title=Weapons
 		AuthorizedWeapons = {
-			
-			{ name = 'WEAPON_SWITCHBLADE',               price = 1000 , piece = 50 },
-			{ name = 'WEAPON_BAT',                       price = 100 ,piece = 15 },
-			{ name = 'WEAPON_FLASHLIGHT',                price = 100 ,piece = 25},
-			{ name = 'WEAPON_NIGHTSTICK',                price = 100 ,piece = 25},
-			{ name = 'WEAPON_PISTOL',                    price = 10000 ,piece = 150 },
-			{ name = 'WEAPON_COMBATPISTOL',              price = 15000 ,piece = 250},
-			{ name = 'WEAPON_MICROSMG',                  price = 50000 ,piece = 500},
-			{ name = 'WEAPON_SPECIALCARBINE',            price = 250000 ,piece = 950},
-			{ name = 'WEAPON_PUMPSHOTGUN',			     price = 75000 ,piece = 750 },
-			{ name = 'WEAPON_BULLPUPRIFLE',    		     price = 100000 ,piece = 1000},
-			{ name = 'WEAPON_SMG',                       price = 40000 ,piece = 650},
-			{ name = 'WEAPON_CARBINERIFLE',    		     price = 150000 ,piece = 1500},
-			{ name = 'WEAPON_SNIPERRIFLE',    		     price = 450000 ,piece = 2000},
-			{ name = 'WEAPON_STUNGUN',                   price = 2000 ,piece = 50},
-			{ name = 'WEAPON_SMOKEGRENADE',              price = 25000 ,piece = 25}
+		
+			{ name = 'WEAPON_SMOKEGRENADE',              price = 25000 ,piece = 25},
+			{ name = 'WEAPON_BAT',                       price = 100 ,piece = 1 },
+			{ name = 'WEAPON_FLASHLIGHT',                price = 100 ,piece = 1},
+			{ name = 'WEAPON_NIGHTSTICK',                price = 100 ,piece = 1},
+			{ name = 'WEAPON_STUNGUN',                   price = 200 ,piece = 1},
+			{ name = 'WEAPON_SWITCHBLADE',               price = 1000 , piece = 1 },
+			{ name = 'WEAPON_BATTLEAXE',               	 price = 2000 , piece = 1 },
+			{ name = 'WEAPON_PISTOL',                    price = 10000 ,piece = 2 },
+			{ name = 'WEAPON_COMBATPISTOL',              price = 15000 ,piece = 3},
+			{ name = 'WEAPON_MICROSMG',                  price = 30000 ,piece = 3},
+			{ name = 'WEAPON_SMG',                       price = 40000 ,piece = 4},
+			{ name = 'WEAPON_PUMPSHOTGUN',			     price = 55000 ,piece = 4 },
+			{ name = 'WEAPON_CARBINERIFLE',    		     price = 120000 ,piece = 10},
+			{ name = 'WEAPON_BULLPUPRIFLE',    		     price = 150000 ,piece = 12},
+			{ name = 'WEAPON_SPECIALCARBINE',            price = 200000 ,piece = 13},
+			{ name = 'WEAPON_SNIPERRIFLE',    		     price = 400000 ,piece = 15}
 		},
 
 		Cloakrooms = {
@@ -98,11 +99,15 @@ Config.AuthorizedVehicles = {
 	Shared = {
 		{
 			model = 'stockade',
-			label = 'Carrinha Logotipo'
+			label = 'Van'
 		},
 		{
-			model = 'Contender',
-			label = 'Carrinha Contender'
+			model = 'Baller6',
+			label = 'SUV'
+		},
+		{
+			model = 'Dubsta3',
+			label = 'Truck 6X'
 		}
 	},
 
@@ -127,50 +132,86 @@ Config.AuthorizedHelicopters = {
 Config.Uniforms = {
 	ammu_wear = {
 		male = {
-			['tshirt_1'] = 56,  ['tshirt_2'] = 1,
-			['torso_1'] = 61,   ['torso_2'] = 3,
+			['tshirt_1'] = 76,  ['tshirt_2'] = 2,
+			['torso_1'] = 122,   ['torso_2'] = 0,
 			['decals_1'] = 0,   ['decals_2'] = 0,
 			['arms'] = 4,
-			['pants_1'] = 59,   ['pants_2'] = 9,
-			['shoes_1'] = 24,   ['shoes_2'] = 0,
-			['helmet_1'] = 0,  ['helmet_2'] = 0,
+			['pants_1'] = 97,   ['pants_2'] = 2,
+			['shoes_1'] = 25,   ['shoes_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
+			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
-			['ears_1'] = 0,     ['ears_2'] = 0
+			['ears_1'] = 0,     ['ears_2'] = 0,
+			['bproof_1'] = 0,     ['bproof_2'] = 0
 		},
 		female = {
-			['tshirt_1'] = 56,  ['tshirt_2'] = 1,
-			['torso_1'] = 61,   ['torso_2'] = 3,
+			['tshirt_1'] = 76,  ['tshirt_2'] = 2,
+			['torso_1'] = 122,   ['torso_2'] = 0,
 			['decals_1'] = 0,   ['decals_2'] = 0,
 			['arms'] = 4,
-			['pants_1'] = 59,   ['pants_2'] = 9,
-			['shoes_1'] = 24,   ['shoes_2'] = 0,
-			['helmet_1'] = 0,  ['helmet_2'] = 0,
+			['pants_1'] = 97,   ['pants_2'] = 2,
+			['shoes_1'] = 25,   ['shoes_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
+			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
-			['ears_1'] = 0,     ['ears_2'] = 0
+			['ears_1'] = 0,     ['ears_2'] = 0,
+			['bproof_1'] = 0,     ['bproof_2'] = 0
+		}
+	},
+	recruit_wear = {
+		male = {
+			['tshirt_1'] = 76,  ['tshirt_2'] = 2,
+			['torso_1'] = 122,   ['torso_2'] = 0,
+			['decals_1'] = 0,   ['decals_2'] = 0,
+			['arms'] = 4,
+			['pants_1'] = 97,   ['pants_2'] = 2,
+			['shoes_1'] = 25,   ['shoes_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
+			['glasses_1'] = 0,  ['glasses_2'] = 0,
+			['chain_1'] = 0,    ['chain_2'] = 0,
+			['ears_1'] = 0,     ['ears_2'] = 0,
+			['bproof_1'] = 0,     ['bproof_2'] = 0
+		},
+		female = {
+			['tshirt_1'] = 76,  ['tshirt_2'] = 2,
+			['torso_1'] = 122,   ['torso_2'] = 0,
+			['decals_1'] = 0,   ['decals_2'] = 0,
+			['arms'] = 4,
+			['pants_1'] = 97,   ['pants_2'] = 2,
+			['shoes_1'] = 25,   ['shoes_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
+			['glasses_1'] = 0,  ['glasses_2'] = 0,
+			['chain_1'] = 0,    ['chain_2'] = 0,
+			['ears_1'] = 0,     ['ears_2'] = 0,
+			['bproof_1'] = 0,     ['bproof_2'] = 0
 		}
 	},
 	boss_wear = { -- currently the same as chef_wear
 		male = {
-			['tshirt_1'] = 56,  ['tshirt_2'] = 1,
-			['torso_1'] = 61,   ['torso_2'] = 3,
+			['tshirt_1'] = 69,  ['tshirt_2'] = 0,
+			['torso_1'] = 23,   ['torso_2'] = 3,
 			['decals_1'] = 0,   ['decals_2'] = 0,
-			['arms'] = 4,
-			['pants_1'] = 59,   ['pants_2'] = 9,
+			['arms'] = 39,
+			['pants_1'] = 59,   ['pants_2'] = 0,
 			['shoes_1'] = 24,   ['shoes_2'] = 0,
-			['helmet_1'] = 0,  ['helmet_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
+			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
-			['ears_1'] = 0,     ['ears_2'] = 0
+			['ears_1'] = 0,     ['ears_2'] = 0,
+			['bproof_1'] = 0,     ['bproof_2'] = 0
 		},
 		female = {
-			['tshirt_1'] = 56,  ['tshirt_2'] = 1,
-			['torso_1'] = 61,   ['torso_2'] = 3,
+			['tshirt_1'] = 69,  ['tshirt_2'] = 0,
+			['torso_1'] = 23,   ['torso_2'] = 3,
 			['decals_1'] = 0,   ['decals_2'] = 0,
-			['arms'] = 4,
-			['pants_1'] = 59,   ['pants_2'] = 9,
+			['arms'] = 39,
+			['pants_1'] = 59,   ['pants_2'] = 0,
 			['shoes_1'] = 24,   ['shoes_2'] = 0,
-			['helmet_1'] = 0,  ['helmet_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
+			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
-			['ears_1'] = 0,     ['ears_2'] = 0
+			['ears_1'] = 0,     ['ears_2'] = 0,
+			['bproof_1'] = 0,     ['bproof_2'] = 0
 		}
 	},
 	bullet_wear = {
@@ -183,26 +224,26 @@ Config.Uniforms = {
 	},
 	gilet_wear = {
 		male = {
-			['tshirt_1'] = 36,  ['tshirt_2'] = 3,
-			['torso_1'] = 30,   ['torso_2'] = 7,
+			['tshirt_1'] = 125,  ['tshirt_2'] = 0,
+			['torso_1'] = 50,   ['torso_2'] = 0,
 			['decals_1'] = 0,   ['decals_2'] = 0,
 			['arms'] = 4,
-			['pants_1'] = 28,   ['pants_2'] = 8,
-			['shoes_1'] = 21,   ['shoes_2'] = 5,
-			['helmet_1'] = 0,  ['helmet_2'] = 0,
+			['pants_1'] = 59,   ['pants_2'] = 0,
+			['shoes_1'] = 25,   ['shoes_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
 			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
 			['ears_1'] = 0,     ['ears_2'] = 0,
 			['bproof_1'] = 0,     ['bproof_2'] = 0
 		},
 		female = {
-			['tshirt_1'] = 36,  ['tshirt_2'] = 3,
-			['torso_1'] = 30,   ['torso_2'] = 7,
+			['tshirt_1'] = 125,  ['tshirt_2'] = 0,
+			['torso_1'] = 50,   ['torso_2'] = 0,
 			['decals_1'] = 0,   ['decals_2'] = 0,
 			['arms'] = 4,
-			['pants_1'] = 28,   ['pants_2'] = 8,
-			['shoes_1'] = 21,   ['shoes_2'] = 5,
-			['helmet_1'] = 0,  ['helmet_2'] = 0,
+			['pants_1'] = 59,   ['pants_2'] = 0,
+			['shoes_1'] = 25,   ['shoes_2'] = 0,
+			['helmet_1'] = -1,  ['helmet_2'] = 0,
 			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
 			['ears_1'] = 0,     ['ears_2'] = 0,

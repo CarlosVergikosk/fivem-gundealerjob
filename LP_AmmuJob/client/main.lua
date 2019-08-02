@@ -34,7 +34,7 @@ ESX                           = nil
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
+		Citizen.Wait(10)
 	end
 
 	while ESX.GetPlayerData().job == nil do
@@ -46,9 +46,9 @@ end)
 
 function SetVehicleMaxMods(vehicle)
 	local props = {
-		modEngine       = 5,
-		modBrakes       = 5,
-		modTransmission = 5,
+		modEngine       = 4,
+		modBrakes       = 4,
+		modTransmission = 4,
 		modSuspension   = 3,
 		modTurbo        = true
 	}
@@ -128,7 +128,7 @@ function OpenCloakroomMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cloakroom',
 	{
 		title    = _U('cloakroom'),
-		align    = 'top-left',
+		align    = 'bottom-right',
 		elements = elements
 	}, function(data, menu)
 
@@ -261,29 +261,30 @@ function OpenCloakroomMenu()
 		menu.close()
 
 		CurrentAction     = 'menu_cloakroom'
-		CurrentActionMsg  = _U('open_cloackroom')
 		CurrentActionData = {}
 	end)
 end
 
 function OpenArmoryMenu(station)
-
+	
 	if Config.EnableArmoryManagement then
 
 		local elements = {
 			{label = _U('get_weapon'),     value = 'get_weapon'},
 			{label = _U('put_weapon'),     value = 'put_weapon'},
 			{label = _U('remove_object'),  value = 'get_stock'},
-			{label = _U('deposit_object'), value = 'put_stock'},
-			{label = _U('buy_weapons'), value = 'buy_weapons'}
+			{label = _U('deposit_object'), value = 'put_stock'}
 		}
+		if PlayerData.job.name == 'ammu' and PlayerData.job.grade_name == 'boss' then
+			table.insert(elements, {label = _U('buy_weapons'), value = 'buy_weapons'})
+		end
 
 		ESX.UI.Menu.CloseAll()
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'armory',
 		{
 			title    = _U('armory'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 
@@ -291,19 +292,18 @@ function OpenArmoryMenu(station)
 				OpenGetWeaponMenu()
 			elseif data.current.value == 'put_weapon' then
 				OpenPutWeaponMenu()
-			elseif data.current.value == 'buy_weapons' then
-				OpenBuyWeaponsMenu(station)
 			elseif data.current.value == 'put_stock' then
 				OpenPutStocksMenu()
 			elseif data.current.value == 'get_stock' then
 				OpenGetStocksMenu()
+			elseif data.current.value == 'buy_weapons' then
+				OpenBuyWeaponsMenu(station)
 			end
-
+			
 		end, function(data, menu)
 			menu.close()
 
 			CurrentAction     = 'menu_armory'
-			CurrentActionMsg  = _U('open_armory')
 			CurrentActionData = {station = station}
 		end)
 
@@ -321,16 +321,15 @@ function OpenArmoryMenu(station)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'armory',
 		{
 			title    = _U('armory'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 			local weapon = data.current.value
-			TriggerServerEvent('esx_ammujob:giveWeapon', weapon, 1000)
+			TriggerServerEvent('esx_ammujob:giveWeapon', weapon, 250)
 		end, function(data, menu)
 			menu.close()
 
 			CurrentAction     = 'menu_armory'
-			CurrentActionMsg  = _U('open_armory')
 			CurrentActionData = {station = station}
 		end)
 
@@ -358,7 +357,7 @@ function OpenVehicleSpawnerMenu(station, partNum)
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_spawner',
 			{
 				title    = _U('vehicle_menu'),
-				align    = 'top-left',
+				align    = 'bottom-right',
 				elements = elements
 			}, function(data, menu)
 				menu.close()
@@ -369,7 +368,6 @@ function OpenVehicleSpawnerMenu(station, partNum)
 				if foundSpawnPoint then
 					ESX.Game.SpawnVehicle(vehicleProps.model, spawnPoint, spawnPoint.heading, function(vehicle)
 						ESX.Game.SetVehicleProperties(vehicle, vehicleProps)
-						TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
 					end)
 
 					TriggerServerEvent('esx_society:removeVehicleFromGarage', 'ammu', vehicleProps)
@@ -378,7 +376,6 @@ function OpenVehicleSpawnerMenu(station, partNum)
 				menu.close()
 
 				CurrentAction     = 'menu_vehicle_spawner'
-				CurrentActionMsg  = _U('vehicle_spawner')
 				CurrentActionData = {station = station, partNum = partNum}
 			end)
 
@@ -401,7 +398,7 @@ function OpenVehicleSpawnerMenu(station, partNum)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_spawner',
 		{
 			title    = _U('vehicle_menu'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 			menu.close()
@@ -411,7 +408,6 @@ function OpenVehicleSpawnerMenu(station, partNum)
 			if foundSpawnPoint then
 				if Config.MaxInService == -1 then
 					ESX.Game.SpawnVehicle(data.current.model, spawnPoint, spawnPoint.heading, function(vehicle)
-						TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
 						SetVehicleMaxMods(vehicle)
 					end)
 				else
@@ -420,7 +416,6 @@ function OpenVehicleSpawnerMenu(station, partNum)
 
 						if isInService then
 							ESX.Game.SpawnVehicle(data.current.model, spawnPoint, spawnPoint.heading, function(vehicle)
-								TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
 								SetVehicleMaxMods(vehicle)
 							end)
 						else
@@ -435,7 +430,6 @@ function OpenVehicleSpawnerMenu(station, partNum)
 			menu.close()
 
 			CurrentAction     = 'menu_vehicle_spawner'
-			CurrentActionMsg  = _U('vehicle_spawner')
 			CurrentActionData = {station = station, partNum = partNum}
 		end)
 
@@ -467,7 +461,7 @@ function OpenammuActionsMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'ammu_actions',
 	{
 		title    = 'ammu',
-		align    = 'top-left',
+		align    = 'bottom-right',
 		elements = {
 			{label = _U('citizen_interaction'),	value = 'citizen_interaction'}
 		}
@@ -475,11 +469,11 @@ function OpenammuActionsMenu()
 
 		if data.current.value == 'citizen_interaction' then
 			local elements = {
-				{label = _U('search'),			value = 'body_search'},
-				{label = _U('handcuff'),		value = 'handcuff'},
-				{label = _U('drag'),			value = 'drag'},
-				{label = _U('put_in_vehicle'),	value = 'put_in_vehicle'},
-				{label = _U('out_the_vehicle'),	value = 'out_the_vehicle'},
+				--{label = _U('search'),			value = 'body_search'},
+				--{label = _U('handcuff'),		value = 'handcuff'},
+				--{label = _U('drag'),			value = 'drag'},
+				--{label = _U('put_in_vehicle'),	value = 'put_in_vehicle'},
+				--{label = _U('out_the_vehicle'),	value = 'out_the_vehicle'},
 				{label = _U('fine'),			value = 'fine'},
 			}
 		
@@ -491,7 +485,7 @@ function OpenammuActionsMenu()
 			'default', GetCurrentResourceName(), 'citizen_interaction',
 			{
 				title    = _U('citizen_interaction'),
-				align    = 'top-left',
+				align    = 'bottom-right',
 				elements = elements
 			}, function(data2, menu2)
 				local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
@@ -510,7 +504,7 @@ function OpenammuActionsMenu()
 					elseif action == 'out_the_vehicle' then
 						TriggerServerEvent('esx_ammujob:OutVehicle', GetPlayerServerId(closestPlayer))
 					elseif action == 'fine' then
-						OpenFineMenu(closestPlayer)
+						OpenBillingMenu(closestPlayer)
 					elseif action == 'license' then
 						ShowPlayerLicense(closestPlayer)
 					end
@@ -609,7 +603,7 @@ function OpenIdentityCardMenu(player)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_interaction',
 		{
 			title    = _U('citizen_interaction'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements,
 		}, function(data, menu)
 	
@@ -671,7 +665,7 @@ function OpenBodySearchMenu(player)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'body_search',
 		{
 			title    = _U('search'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements,
 		},
 		function(data, menu)
@@ -693,91 +687,36 @@ function OpenBodySearchMenu(player)
 
 end
 
-function OpenFineMenu(player)
+function OpenBillingMenu()
 
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'fine',
-	{
-		title    = _U('fine'),
-		align    = 'top-left',
-		elements = {
-			{label = _U('Nivel_1'),   value = 1},
-			{label = _U('Nivel_2'), value = 2},
-			{label = _U('Nivel_3'),   value = 3}
-		}
-	}, function(data, menu)
-		OpenFineCategoryMenu(player, data.current.value)
-	end, function(data, menu)
-		menu.close()
-	end)
+  ESX.UI.Menu.Open(
+    'dialog', GetCurrentResourceName(), 'billing',
+    {
+      title = _U('billing_amount')
+    },
+    function(data, menu)
+    
+      local amount = tonumber(data.value)
+      local player, distance = ESX.Game.GetClosestPlayer()
 
-end
+      if player ~= -1 and distance <= 3.0 then
 
-function OpenFineCategoryMenu(player, category)
+        menu.close()
+        if amount == nil then
+            ESX.ShowNotification(_U('amount_invalid'))
+        else
+            TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(player), 'society_ammu', _U('billing'), amount)
+        end
 
-	ESX.TriggerServerCallback('esx_ammujob:getFineList', function(fines)
+      else
+        ESX.ShowNotification(_U('no_players_nearby'))
+      end
 
-		local elements = {}
-
-		for i=1, #fines, 1 do
-			table.insert(elements, {
-				label     = fines[i].label .. ' <span style="color: green;">$' .. fines[i].amount .. '</span>',
-				value     = fines[i].id,
-				amount    = fines[i].amount,
-				fineLabel = fines[i].label
-			})
-		end
-
-		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'fine_category',
-		{
-			title    = _U('fine'),
-			align    = 'top-left',
-			elements = elements,
-		}, function(data, menu)
-
-			local label  = data.current.fineLabel
-			local amount = data.current.amount
-
-			menu.close()
-
-			if Config.EnablePlayerManagement then
-				TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(player), 'society_ammu', _U('fine_total', label), amount)
-			else
-				TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(player), '', _U('fine_total', label), amount)
-			end
-
-			ESX.SetTimeout(300, function()
-				OpenFineCategoryMenu(player, category)
-			end)
-
-		end, function(data, menu)
-			menu.close()
-		end)
-
-	end, category)
-
-end
-
-function LookupVehicle()
-	ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'lookup_vehicle',
-	{
-		title = _U('search_database_title'),
-	}, function(data, menu)
-		local length = string.len(data.value)
-		if data.value == nil or length < 2 or length > 13 then
-			ESX.ShowNotification(_U('search_database_error_invalid'))
-		else
-			ESX.TriggerServerCallback('esx_ammujob:getVehicleFromPlate', function(owner, found)
-				if found then
-					ESX.ShowNotification(_U('search_database_found', owner))
-				else
-					ESX.ShowNotification(_U('search_database_error_not_found'))
-				end
-			end, data.value)
-			menu.close()
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+    end,
+    function(data, menu)
+        menu.close()
+    end
+  )
 end
 
 function ShowPlayerLicense(player)
@@ -801,7 +740,7 @@ function ShowPlayerLicense(player)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'manage_license',
 		{
 			title    = _U('license_revoke'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements,
 		}, function(data, menu)
 			ESX.ShowNotification(_U('licence_you_revoked', data.current.label, targetName))
@@ -819,54 +758,6 @@ function ShowPlayerLicense(player)
 	end, GetPlayerServerId(player))
 end
 
-function OpenUnpaidBillsMenu(player)
-	local elements = {}
-
-	ESX.TriggerServerCallback('esx_billing:getTargetBills', function(bills)
-		for i=1, #bills, 1 do
-			table.insert(elements, {label = bills[i].label .. ' - <span style="color: red;">$' .. bills[i].amount .. '</span>', value = bills[i].id})
-		end
-
-		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'billing',
-		{
-			title    = _U('unpaid_bills'),
-			align    = 'top-left',
-			elements = elements
-		}, function(data, menu)
-	
-		end, function(data, menu)
-			menu.close()
-		end)
-	end, GetPlayerServerId(player))
-end
-
-function OpenVehicleInfosMenu(vehicleData)
-
-	ESX.TriggerServerCallback('esx_ammujob:getVehicleInfos', function(retrivedInfo)
-
-		local elements = {}
-
-		table.insert(elements, {label = _U('plate', retrivedInfo.plate), value = nil})
-
-		if retrivedInfo.owner == nil then
-			table.insert(elements, {label = _U('owner_unknown'), value = nil})
-		else
-			table.insert(elements, {label = _U('owner', retrivedInfo.owner), value = nil})
-		end
-
-		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_infos',
-		{
-			title    = _U('vehicle_info'),
-			align    = 'top-left',
-			elements = elements
-		}, nil, function(data, menu)
-			menu.close()
-		end)
-
-	end, vehicleData.plate)
-
-end
-
 function OpenGetWeaponMenu()
 
 	ESX.TriggerServerCallback('esx_ammujob:getArmoryWeapons', function(weapons)
@@ -881,7 +772,7 @@ function OpenGetWeaponMenu()
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'armory_get_weapon',
 		{
 			title    = _U('get_weapon_menu'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 
@@ -914,7 +805,7 @@ function OpenPutWeaponMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'armory_put_weapon',
 	{
 		title    = _U('put_weapon_menu'),
-		align    = 'top-left',
+		align    = 'bottom-right',
 		elements = elements
 	}, function(data, menu)
 
@@ -957,7 +848,7 @@ function OpenBuyWeaponsMenu(station)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'armory_buy_weapons',
 		{
 			title    = _U('buy_weapon_menu'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements,
 		}, function(data, menu)
 
@@ -993,7 +884,7 @@ function OpenGetStocksMenu()
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu',
 		{
 			title    = _U('ammu_stock'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 
@@ -1045,7 +936,7 @@ function OpenPutStocksMenu()
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu',
 		{
 			title    = _U('inventory'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 
@@ -1113,19 +1004,16 @@ AddEventHandler('esx_ammujob:hasEnteredMarker', function(station, part, partNum)
 
 	if part == 'Cloakroom' then
 		CurrentAction     = 'menu_cloakroom'
-		CurrentActionMsg  = _U('open_cloackroom')
 		CurrentActionData = {}
 
 	elseif part == 'Armory' then
 
 		CurrentAction     = 'menu_armory'
-		CurrentActionMsg  = _U('open_armory')
 		CurrentActionData = {station = station}
 
 	elseif part == 'VehicleSpawner' then
 
 		CurrentAction     = 'menu_vehicle_spawner'
-		CurrentActionMsg  = _U('vehicle_spawner')
 		CurrentActionData = {station = station, partNum = partNum}
 
 	elseif part == 'HelicopterSpawner' then
@@ -1150,7 +1038,6 @@ AddEventHandler('esx_ammujob:hasEnteredMarker', function(station, part, partNum)
 
 			if DoesEntityExist(vehicle) then
 				CurrentAction     = 'delete_vehicle'
-				CurrentActionMsg  = _U('store_vehicle')
 				CurrentActionData = {vehicle = vehicle}
 			end
 
@@ -1158,12 +1045,10 @@ AddEventHandler('esx_ammujob:hasEnteredMarker', function(station, part, partNum)
 	elseif part == 'BossActions' then
 
 		CurrentAction     = 'menu_boss_actions'
-		CurrentActionMsg  = _U('open_bossmenu')
 		CurrentActionData = {}
 		
 	elseif part == 'Garage' then
 		CurrentAction     = 'ammu_harvest_menu'
-		CurrentActionMsg  = _U('harvest_menu')
 		CurrentActionData = {}
 	end
 
@@ -1183,7 +1068,6 @@ AddEventHandler('esx_ammujob:hasEnteredEntityZone', function(entity)
 
 	if PlayerData.job ~= nil and PlayerData.job.name == 'ammu' and IsPedOnFoot(playerPed) then
 		CurrentAction     = 'remove_entity'
-		CurrentActionMsg  = _U('remove_prop')
 		CurrentActionData = {entity = entity}
 	end
 
@@ -1261,7 +1145,7 @@ end)
 
 -- APANHAS
 function OpenAmmuHarvestMenu()
-	if Config.EnablePlayerManagement and ESX.PlayerData.job and ESX.PlayerData.job.name == 'ammu' then
+	if Config.EnablePlayerManagement and ESX.PlayerData.job.name == "ammu" then --and ESX.PlayerData.job
 		local elements = {
 			{label = _U('weapon_piece'), value = 'weapon_piece'}
 		}
@@ -1270,7 +1154,7 @@ function OpenAmmuHarvestMenu()
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'ammu_harvest', {
 			title    = _U('harvest'),
-			align    = 'top-left',
+			align    = 'bottom-right',
 			elements = elements
 		}, function(data, menu)
 			menu.close()
@@ -1281,7 +1165,6 @@ function OpenAmmuHarvestMenu()
 		end, function(data, menu)
 			menu.close()
 			CurrentAction     = 'ammu_harvest_menu'
-			CurrentActionMsg  = _U('harvest_menu')
 			CurrentActionData = {}
 		end)
 	else
@@ -1520,38 +1403,38 @@ Citizen.CreateThread(function()
 
 				for i=1, #v.Cloakrooms, 1 do
 					if GetDistanceBetweenCoords(coords, v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, 'Clique [E] para mudar de roupa')
+						DrawText3Ds(v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, 'Clique ~g~[E]~s~ para mudar de roupa')
 					end
 				end
 
 				for i=1, #v.Armories, 1 do
 					if GetDistanceBetweenCoords(coords, v.Armories[i].x, v.Armories[i].y, v.Armories[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Armories[i].x, v.Armories[i].y, v.Armories[i].z, 'Clique [E] para abrir Arsenal')
+						DrawText3Ds(v.Armories[i].x, v.Armories[i].y, v.Armories[i].z, 'Clique ~g~[E]~s~ para abrir Arsenal')
 					end
 				end
 
 				for i=1, #v.Vehicles, 1 do
 					if GetDistanceBetweenCoords(coords, v.Vehicles[i].Spawner.x, v.Vehicles[i].Spawner.y, v.Vehicles[i].Spawner.z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Vehicles[i].Spawner.x, v.Vehicles[i].Spawner.y, v.Vehicles[i].Spawner.z, 'Clique [E] para abrir Garagem')
+						DrawText3Ds(v.Vehicles[i].Spawner.x, v.Vehicles[i].Spawner.y, v.Vehicles[i].Spawner.z, 'Clique ~g~[E]~s~ para abrir Garagem')
 					end
 				end
 
 				for i=1, #v.VehicleDeleters, 1 do
 					if GetDistanceBetweenCoords(coords, v.VehicleDeleters[i].x, v.VehicleDeleters[i].y, v.VehicleDeleters[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.VehicleDeleters[i].x, v.VehicleDeleters[i].y, v.VehicleDeleters[i].z, 'Clique [E] para guardar veículo')
+						DrawText3Ds(v.VehicleDeleters[i].x, v.VehicleDeleters[i].y, v.VehicleDeleters[i].z, 'Clique ~g~[E]~s~ para guardar veículo')
 					end
 				end
 				
 				for i=1, #v.Garage, 1 do
 					if GetDistanceBetweenCoords(coords, v.Garage[i].x, v.Garage[i].y, v.Garage[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Garage[i].x, v.Garage[i].y, v.Garage[i].z, 'Clique [E] para colher peças de armas')
+						DrawText3Ds(v.Garage[i].x, v.Garage[i].y, v.Garage[i].z, 'Clique ~g~[E]~s~ para colher peças de armas')
 					end
 				end
 
 				if Config.EnablePlayerManagement and PlayerData.job.grade_name == 'boss' then
 					for i=1, #v.BossActions, 1 do
 						if not v.BossActions[i].disabled and GetDistanceBetweenCoords(coords, v.BossActions[i].x, v.BossActions[i].y, v.BossActions[i].z, true) < Config.DrawDistance then
-							DrawText3Ds(v.BossActions[i].x, v.BossActions[i].y, v.BossActions[i].z, 'Clique [E] para abrir Gerência')
+							DrawText3Ds(v.BossActions[i].x, v.BossActions[i].y, v.BossActions[i].z, 'Clique ~g~[E]~s~ para abrir Gerência')
 						end
 					end
 				end
@@ -1763,7 +1646,6 @@ Citizen.CreateThread(function()
 					TriggerEvent('esx_society:openBossMenu', 'ammu', function(data, menu)
 						menu.close()
 						CurrentAction     = 'menu_boss_actions'
-						CurrentActionMsg  = _U('open_bossmenu')
 						CurrentActionData = {}
 					end, { wash = false }) -- disable washing money
 				elseif CurrentAction == 'remove_entity' then
