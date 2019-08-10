@@ -46,11 +46,11 @@ end)
 
 function SetVehicleMaxMods(vehicle)
 	local props = {
-		modEngine       = 4,
-		modBrakes       = 4,
-		modTransmission = 4,
-		modSuspension   = 3,
-		modTurbo        = true
+		modEngine       = 0,
+		modBrakes       = 0,
+		modTransmission = 0,
+		modSuspension   = 0,
+		modTurbo        = false
 	}
 
 	ESX.Game.SetVehicleProperties(vehicle, props)
@@ -1145,7 +1145,9 @@ end)
 
 -- APANHAS
 function OpenAmmuHarvestMenu()
-	if Config.EnablePlayerManagement and ESX.PlayerData.job.name == "ammu" then --and ESX.PlayerData.job
+	PlayerData = ESX.GetPlayerData()
+	
+	if Config.EnablePlayerManagement and PlayerData.job.name == "ammu" then --and ESX.PlayerData.job
 		local elements = {
 			{label = _U('weapon_piece'), value = 'weapon_piece'}
 		}
