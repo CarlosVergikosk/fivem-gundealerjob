@@ -23,7 +23,7 @@ Developed for Los Pepinos RP
 
 - You need to farm weapon pieces, then you can buy weapons in the armory.
 
-INSTALLATION
+### INSTALLATION
 
   start LP_AmmuJob
 
