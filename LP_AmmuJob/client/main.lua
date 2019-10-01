@@ -768,7 +768,7 @@ function OpenGetWeaponMenu()
 
 			ESX.TriggerServerCallback('esx_ammujob:removeArmoryWeapon', function()
 				OpenGetWeaponMenu()
-			end, data.current.value)
+			end, data.current.value, Config.Bullets)
 
 		end, function(data, menu)
 			menu.close()
