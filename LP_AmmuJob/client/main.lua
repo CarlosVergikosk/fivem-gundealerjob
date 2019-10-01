@@ -313,7 +313,7 @@ function OpenArmoryMenu(station)
 			elements = elements
 		}, function(data, menu)
 			local weapon = data.current.value
-			TriggerServerEvent('esx_ammujob:giveWeapon', weapon, 250)
+			TriggerServerEvent('esx_ammujob:giveWeapon', weapon, Config.Bullets)
 		end, function(data, menu)
 			menu.close()
 
