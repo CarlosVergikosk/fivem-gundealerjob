@@ -19,6 +19,7 @@ Config.EnableJobBlip              = false -- enable blips for colleagues, requir
 
 Config.MaxInService               = -1
 Config.Locale = 'en'
+Config.Bullets  		  = 30
 
 Config.PoliceStations = {
 
