@@ -387,12 +387,12 @@ ESX.RegisterServerCallback('esx_ammujob:buy', function(source, cb, amountM, amou
 	end
 end)
 
-ESX.RegisterServerCallback('esx_ammujob:removeArmoryWeapon', function(source, cb, weaponName)
+ESX.RegisterServerCallback('esx_ammujob:removeArmoryWeapon', function(source, cb, weaponName, bullets)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 
-	xPlayer.addWeapon(weaponName, 500)
+	xPlayer.addWeapon(weaponName, bullets)
 
 	TriggerEvent('esx_datastore:getSharedDataStore', 'society_ammu', function(store)
 
