@@ -139,5 +139,12 @@ Locales['pr'] = {
     -- Notifications
     ['alert_ammu'] = 'Ammu Alert pr',
     ['phone_police'] = 'Ammu-Nation',
+    -- TextDraws
+    ['changecloth'] = 'Clique ~g~[E]~s~ para mudar de roupa',
+    ['Arsenal'] = 'Clique ~g~[E]~s~ para abrir Arsenal',
+    ['garage'] = 'Clique ~g~[E]~s~ para abrir Garagem',
+    ['storeveh'] = 'Clique ~g~[E]~s~ para guardar veículo',
+    ['weaparts'] = 'Clique ~g~[E]~s~ para colher peças de armas',
+    ['boss'] = 'Clique ~g~[E]~s~ para abrir Gerência',
   }
   

@@ -1393,38 +1393,39 @@ Citizen.CreateThread(function()
 
 				for i=1, #v.Cloakrooms, 1 do
 					if GetDistanceBetweenCoords(coords, v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, 'Press ~g~[E]~s~ to change clothes')
+						--DrawText3Ds(v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, 'Press ~g~[E]~s~ to change clothes')
+						DrawText3Ds(v.Cloakrooms[i].x, v.Cloakrooms[i].y, v.Cloakrooms[i].z, _U('changecloth'))
 					end
 				end
 
 				for i=1, #v.Armories, 1 do
 					if GetDistanceBetweenCoords(coords, v.Armories[i].x, v.Armories[i].y, v.Armories[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Armories[i].x, v.Armories[i].y, v.Armories[i].z, 'Press ~g~[E]~s~ to open Arsenal')
+						DrawText3Ds(v.Armories[i].x, v.Armories[i].y, v.Armories[i].z, _U('Arsenal'))
 					end
 				end
 
 				for i=1, #v.Vehicles, 1 do
 					if GetDistanceBetweenCoords(coords, v.Vehicles[i].Spawner.x, v.Vehicles[i].Spawner.y, v.Vehicles[i].Spawner.z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Vehicles[i].Spawner.x, v.Vehicles[i].Spawner.y, v.Vehicles[i].Spawner.z, 'Press ~g~[E]~s~ to open Garage')
+						DrawText3Ds(v.Vehicles[i].Spawner.x, v.Vehicles[i].Spawner.y, v.Vehicles[i].Spawner.z, _U('garage'))
 					end
 				end
 
 				for i=1, #v.VehicleDeleters, 1 do
 					if GetDistanceBetweenCoords(coords, v.VehicleDeleters[i].x, v.VehicleDeleters[i].y, v.VehicleDeleters[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.VehicleDeleters[i].x, v.VehicleDeleters[i].y, v.VehicleDeleters[i].z, 'Press ~g~[E]~s~ to store vehicle')
+						DrawText3Ds(v.VehicleDeleters[i].x, v.VehicleDeleters[i].y, v.VehicleDeleters[i].z, _U('storeveh'))
 					end
 				end
 				
 				for i=1, #v.Garage, 1 do
 					if GetDistanceBetweenCoords(coords, v.Garage[i].x, v.Garage[i].y, v.Garage[i].z, true) < Config.DrawDistance then
-						DrawText3Ds(v.Garage[i].x, v.Garage[i].y, v.Garage[i].z, 'Press ~g~[E]~s~ to pick up weapon parts')
+						DrawText3Ds(v.Garage[i].x, v.Garage[i].y, v.Garage[i].z, _U('weaparts'))
 					end
 				end
 
 				if Config.EnablePlayerManagement and PlayerData.job.grade_name == 'boss' then
 					for i=1, #v.BossActions, 1 do
 						if not v.BossActions[i].disabled and GetDistanceBetweenCoords(coords, v.BossActions[i].x, v.BossActions[i].y, v.BossActions[i].z, true) < Config.DrawDistance then
-							DrawText3Ds(v.BossActions[i].x, v.BossActions[i].y, v.BossActions[i].z, 'Press ~g~[E]~s~ to open Management')
+							DrawText3Ds(v.BossActions[i].x, v.BossActions[i].y, v.BossActions[i].z, _U('boss'))
 						end
 					end
 				end

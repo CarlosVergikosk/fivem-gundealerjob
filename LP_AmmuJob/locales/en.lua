@@ -139,4 +139,11 @@ Locales['en'] = {
   -- Notifications
   ['alert_ammu'] = 'Ammu Alert',
   ['phone_police'] = 'Ammu-Nation',
+  -- TextDraws
+  ['changecloth'] = 'Press ~g~[E]~s~ to change clothes',
+  ['Arsenal'] = 'Press ~g~[E]~s~ to open Arsenal',
+  ['garage'] = 'Press ~g~[E]~s~ to open Garage',
+  ['storeveh'] = 'Press ~g~[E]~s~ to store vehicle',
+  ['weaparts'] = 'Press ~g~[E]~s~ to pick up weapon parts',
+  ['boss'] = 'Press ~g~[E]~s~ to open Management',
 }
