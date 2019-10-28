@@ -1,6 +1,6 @@
 resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
-description 'ESX Police Job'
+description 'ESX Ammunation Job'
 
 version '1.3.0'
 
@@ -15,6 +15,7 @@ server_scripts {
 	'locales/fi.lua',
 	'locales/es.lua',
 	'locales/sv.lua',
+	'locales/pr.lua',
 	'config.lua',
 	'server/main.lua'
 }
@@ -29,6 +30,7 @@ client_scripts {
 	'locales/fi.lua',
 	'locales/es.lua',
 	'locales/sv.lua',
+	'locales/pr.lua',
 	'config.lua',
 	'client/main.lua'
 }

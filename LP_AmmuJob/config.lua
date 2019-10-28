@@ -18,7 +18,7 @@ Config.HandcuffTimer              = 10 * 60000 -- 10 mins
 Config.EnableJobBlip              = false -- enable blips for colleagues, requires esx_society
 
 Config.MaxInService               = -1
-Config.Locale = 'en'
+Config.Locale = 				'pr'
 Config.Bullets  		  = 30
 
 Config.PoliceStations = {
