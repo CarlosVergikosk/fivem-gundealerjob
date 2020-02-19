@@ -18,7 +18,7 @@ Config.HandcuffTimer              = 10 * 60000 -- 10 mins
 Config.EnableJobBlip              = false -- enable blips for colleagues, requires esx_society
 
 Config.MaxInService               = -1
-Config.Locale = 				'pr'
+Config.Locale = 				'en'
 Config.Bullets  		  = 30
 
 Config.PoliceStations = {
@@ -98,6 +98,38 @@ Config.PoliceStations = {
 -- https://wiki.rage.mp/index.php?title=Vehicles
 Config.AuthorizedVehicles = {
 	Shared = {
+	},
+
+	recruit = {
+		{
+			model = 'stockade',
+			label = 'Van'
+		},
+		{
+			model = 'Baller6',
+			label = 'SUV'
+		},
+		{
+			model = 'Dubsta3',
+			label = 'Truck 6X'
+		}
+	},
+	officer = {
+		{
+			model = 'stockade',
+			label = 'Van'
+		},
+		{
+			model = 'Baller6',
+			label = 'SUV'
+		},
+		{
+			model = 'Dubsta3',
+			label = 'Truck 6X'
+		}
+	},
+	
+	sergeant = {
 		{
 			model = 'stockade',
 			label = 'Van'
@@ -112,9 +144,20 @@ Config.AuthorizedVehicles = {
 		}
 	},
 
-	recruit = {},
-
-	boss = {}
+	boss = {
+		{
+			model = 'stockade',
+			label = 'Van'
+		},
+		{
+			model = 'Baller6',
+			label = 'SUV'
+		},
+		{
+			model = 'Dubsta3',
+			label = 'Truck 6X'
+		}
+	},
 }
 
 Config.AuthorizedHelicopters = {
@@ -146,14 +189,14 @@ Config.Uniforms = {
 			['bproof_1'] = 0,     ['bproof_2'] = 0
 		},
 		female = {
-			['tshirt_1'] = 76,  ['tshirt_2'] = 2,
-			['torso_1'] = 122,   ['torso_2'] = 0,
+			['tshirt_1'] = 0,  ['tshirt_2'] = 13,
+			['torso_1'] = 6,   ['torso_2'] = 0,
 			['decals_1'] = 0,   ['decals_2'] = 0,
-			['arms'] = 4,
-			['pants_1'] = 97,   ['pants_2'] = 2,
-			['shoes_1'] = 25,   ['shoes_2'] = 0,
-			['helmet_1'] = -1,  ['helmet_2'] = 0,
-			['glasses_1'] = 0,  ['glasses_2'] = 0,
+			['arms'] = 38,
+			['pants_1'] = 6,   ['pants_2'] = 0,
+			['shoes_1'] = 58,   ['shoes_2'] = 9,
+			['helmet_1'] = 27,  ['helmet_2'] = 0,
+			['glasses_1'] = 11,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,
 			['ears_1'] = 0,     ['ears_2'] = 0,
 			['bproof_1'] = 0,     ['bproof_2'] = 0
@@ -193,8 +236,8 @@ Config.Uniforms = {
 			['torso_1'] = 23,   ['torso_2'] = 3,
 			['decals_1'] = 0,   ['decals_2'] = 0,
 			['arms'] = 39,
-			['pants_1'] = 59,   ['pants_2'] = 0,
-			['shoes_1'] = 24,   ['shoes_2'] = 0,
+			['pants_1'] = 10,   ['pants_2'] = 0,
+			['shoes_1'] = 20,   ['shoes_2'] = 3,
 			['helmet_1'] = -1,  ['helmet_2'] = 0,
 			['glasses_1'] = 0,  ['glasses_2'] = 0,
 			['chain_1'] = 0,    ['chain_2'] = 0,

@@ -17,7 +17,9 @@ This resource uses and requires ESX. ESX must be installed and working.
 ### Notes:  
 Feel free to costumize this script, you find some bugs, please report them to me!
 
-Currently, the locales are in Portuguese, but feel free to change it to you language!
+~~Currently, the locales are in Portuguese, but feel free to change it to you language!~~
+
+Currently it support English and Portuguese, You can choose them via Config file!
 
 **Based on ESX_Policejob.**
 
